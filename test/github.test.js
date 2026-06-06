@@ -67,6 +67,22 @@ test("reports missing remote maintenance signals", async () => {
   assert.equal(report.rating, "needs-work");
 });
 
+test("uses version tags when a remote repository has no GitHub release", async () => {
+  const report = await analyzeGitHubRepository(
+    { owner: "heisenbug98", name: "oss-readiness-checker" },
+    {
+      fetch: createMockFetch({
+        latestRelease: null,
+        tags: [{ name: "v0.1.0" }, { name: "v0.3.0" }, { name: "experiment" }],
+      }),
+    },
+  );
+
+  assert.equal(report.metrics.latestRelease, null);
+  assert.equal(report.results.find((result) => result.id === "release_tags").passed, true);
+  assert.equal(report.results.find((result) => result.id === "release_tags").found, "v0.3.0");
+});
+
 test("surfaces GitHub API errors clearly", async () => {
   await assert.rejects(
     () =>
@@ -81,6 +97,23 @@ test("surfaces GitHub API errors clearly", async () => {
         },
       ),
     /GitHub API request failed \(404\): Not Found/,
+  );
+});
+
+test("surfaces GitHub API rate limits clearly", async () => {
+  await assert.rejects(
+    () =>
+      analyzeGitHubRepository(
+        { owner: "heisenbug98", name: "oss-readiness-checker" },
+        {
+          fetch: async () =>
+            new Response(JSON.stringify({ message: "API rate limit exceeded" }), {
+              status: 403,
+              headers: { "Content-Type": "application/json" },
+            }),
+        },
+      ),
+    /GitHub API request failed \(403\): API rate limit exceeded/,
   );
 });
 

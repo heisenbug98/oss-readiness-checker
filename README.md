@@ -107,13 +107,16 @@ It does not try to predict eligibility for any specific grant or support program
 ## Documentation
 
 - [Maintainer checklist](docs/maintainer-checklist.md)
+- [Scoring rationale](docs/scoring.md)
 - [Roadmap](docs/roadmap.md)
 - [Application evidence](docs/application-evidence.md)
-- [PR comment workflow draft](docs/pr-comment-workflow.md)
+- [PR comment workflow](docs/pr-comment-workflow.md)
 - [GitHub Actions example](examples/github-action.md)
+- [Publishing preparation](docs/publishing.md)
 - [Sample report](examples/sample-report.txt)
 - [Sample Markdown report](examples/sample-report.md)
 - [Sample GitHub report](examples/github-report.md)
+- [Maintainers](MAINTAINERS.md)
 
 ## Development
 
