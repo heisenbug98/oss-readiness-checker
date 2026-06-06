@@ -13,7 +13,10 @@
 | Passed | Security policy | `SECURITY.md` | - |
 | Passed | Issue templates | `.github/ISSUE_TEMPLATE` | - |
 | Passed | Pull request template | `.github/PULL_REQUEST_TEMPLATE.md` | - |
-| Passed | Tests or CI | `package.json` | - |
+| Passed | Tests | `package.json` | - |
+| Passed | CI workflows | `.github/workflows` | - |
 | Passed | Commit activity | - | - |
+| Passed | Changelog | `CHANGELOG.md` | - |
+| Passed | Release tags | `v0.2.0` | - |
 
 **Next step:** publish the repository, make one useful release, and invite real feedback.
