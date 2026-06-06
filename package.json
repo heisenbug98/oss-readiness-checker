@@ -1,0 +1,24 @@
+{
+  "name": "oss-readiness-checker",
+  "version": "0.1.0",
+  "description": "A tiny CLI that checks whether a repository has the basic signals expected from a maintained open source project.",
+  "type": "module",
+  "bin": {
+    "oss-ready": "./bin/oss-ready.js"
+  },
+  "scripts": {
+    "test": "node --test",
+    "check": "node ./bin/oss-ready.js ."
+  },
+  "keywords": [
+    "open-source",
+    "maintainer",
+    "cli",
+    "github",
+    "readiness"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  }
+}

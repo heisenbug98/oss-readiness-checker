@@ -1,0 +1,16 @@
+OSS readiness score: 89/100 (ready)
+Repository: /path/to/oss-readiness-checker
+
+Checks:
+  OK README (README.md)
+  OK License (LICENSE)
+  OK Contributing guide (CONTRIBUTING.md)
+  OK Code of conduct (CODE_OF_CONDUCT.md)
+  OK Security policy (SECURITY.md)
+  OK Issue templates (.github/ISSUE_TEMPLATE)
+  OK Pull request template (.github/PULL_REQUEST_TEMPLATE.md)
+  OK Tests or CI (package.json)
+  -- Commit activity
+     Make at least one real commit after the initial scaffold.
+
+Next step: publish the repository, make one useful release, and invite real feedback.
