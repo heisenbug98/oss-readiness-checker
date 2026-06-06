@@ -37,6 +37,37 @@ test("prints JSON when requested", async () => {
   assert.equal(report.results.find((result) => result.id === "readme").passed, true);
 });
 
+test("prints Markdown when requested", async () => {
+  const repoPath = mkdtempSync(path.join(tmpdir(), "oss-ready-"));
+  writeFileSync(path.join(repoPath, "README.md"), "# Example\n");
+  const output = captureOutput();
+
+  const exitCode = await runCli([repoPath, "--markdown"], {
+    cwd: repoPath,
+    stdout: output.stdout,
+    stderr: output.stderr,
+  });
+
+  assert.equal(exitCode, 0);
+  assert.match(output.stdout.text, /^# OSS readiness report/);
+  assert.match(output.stdout.text, /\| Passed \| README \| `README.md` \| - \|/);
+  assert.match(output.stdout.text, /\| Missing \| License \| - \| Add a clear open source license/);
+});
+
+test("rejects multiple output formats", async () => {
+  const output = captureOutput();
+
+  await assert.rejects(
+    () =>
+      runCli(["--json", "--markdown"], {
+        cwd: process.cwd(),
+        stdout: output.stdout,
+        stderr: output.stderr,
+      }),
+    /Choose only one output format/,
+  );
+});
+
 function captureOutput() {
   return {
     stdout: {

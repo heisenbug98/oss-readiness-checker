@@ -50,6 +50,12 @@ Print JSON:
 node ./bin/oss-ready.js . --json
 ```
 
+Print Markdown for a GitHub issue, pull request comment, or release note:
+
+```bash
+node ./bin/oss-ready.js . --markdown
+```
+
 Use it in CI with a minimum score:
 
 ```bash
@@ -80,6 +86,7 @@ It does not try to predict eligibility for any specific grant or support program
 - [Maintainer checklist](docs/maintainer-checklist.md)
 - [Roadmap](docs/roadmap.md)
 - [Sample report](examples/sample-report.txt)
+- [Sample Markdown report](examples/sample-report.md)
 
 ## Development
 

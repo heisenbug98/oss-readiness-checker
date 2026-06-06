@@ -5,9 +5,12 @@ OSS Readiness Checker is intentionally small. The goal is to help new maintainer
 ## Planned
 
 - Detect GitHub Actions workflow names and common CI providers.
-- Add a Markdown output mode for issue comments and release notes.
 - Add fixtures for Python, Node.js, Rust, and documentation-only repositories.
 - Improve scoring guidance for early projects with no external contributors yet.
+
+## Completed
+
+- Add a Markdown output mode for issue comments and release notes.
 
 ## Not planned
 

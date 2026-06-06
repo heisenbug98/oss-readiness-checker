@@ -10,8 +10,10 @@ export async function runCli(args, io) {
 
   const report = analyzeRepository(parsed.repoPath ?? io.cwd);
 
-  if (parsed.json) {
+  if (parsed.format === "json") {
     io.stdout.write(`${JSON.stringify(report, null, 2)}\n`);
+  } else if (parsed.format === "markdown") {
+    io.stdout.write(formatMarkdownReport(report));
   } else {
     io.stdout.write(formatReport(report));
   }
@@ -27,7 +29,7 @@ export async function runCli(args, io) {
 function parseArgs(args) {
   const parsed = {
     help: false,
-    json: false,
+    format: "text",
     failUnder: null,
     repoPath: null,
   };
@@ -38,7 +40,9 @@ function parseArgs(args) {
     if (arg === "--help" || arg === "-h") {
       parsed.help = true;
     } else if (arg === "--json") {
-      parsed.json = true;
+      setFormat(parsed, "json");
+    } else if (arg === "--markdown") {
+      setFormat(parsed, "markdown");
     } else if (arg === "--fail-under") {
       index += 1;
       parsed.failUnder = parseScore(args[index]);
@@ -52,6 +56,14 @@ function parseArgs(args) {
   }
 
   return parsed;
+}
+
+function setFormat(parsed, format) {
+  if (parsed.format !== "text") {
+    throw new Error("Choose only one output format: --json or --markdown.");
+  }
+
+  parsed.format = format;
 }
 
 function parseScore(value) {
@@ -90,6 +102,35 @@ function formatReport(report) {
   return lines.join("\n");
 }
 
+function formatMarkdownReport(report) {
+  const lines = [
+    "# OSS readiness report",
+    "",
+    `**Score:** ${report.score}/100 (${report.rating})`,
+    `**Repository:** \`${report.path}\``,
+  ];
+
+  if (report.githubRemote) {
+    lines.push(`**GitHub remote:** \`${report.githubRemote}\``);
+  }
+
+  lines.push("", "| Status | Check | Evidence | Advice |", "| --- | --- | --- | --- |");
+
+  for (const result of report.results) {
+    const status = result.passed ? "Passed" : "Missing";
+    const evidence = result.found ? `\`${escapeMarkdownTableCell(result.found)}\`` : "-";
+    const advice = result.advice ? escapeMarkdownTableCell(result.advice) : "-";
+    lines.push(`| ${status} | ${escapeMarkdownTableCell(result.title)} | ${evidence} | ${advice} |`);
+  }
+
+  lines.push("", `**Next step:** ${getNextStep(report.score).replace("Next step: ", "")}`, "");
+  return lines.join("\n");
+}
+
+function escapeMarkdownTableCell(value) {
+  return value.replaceAll("|", "\\|").replaceAll("\n", " ");
+}
+
 function getNextStep(score) {
   if (score >= 85) {
     return "Next step: publish the repository, make one useful release, and invite real feedback.";
@@ -110,11 +151,13 @@ Check whether a repository has basic open source maintenance signals.
 Usage:
   oss-ready [path]
   oss-ready [path] --json
+  oss-ready [path] --markdown
   oss-ready [path] --fail-under 80
 
 Options:
   -h, --help             Show this help message
   --json                 Print a JSON report
+  --markdown             Print a Markdown report
   --fail-under <score>   Exit with code 1 when the score is below this threshold
 `;
 }
