@@ -4,13 +4,14 @@ OSS Readiness Checker is intentionally small. The goal is to help new maintainer
 
 ## Planned
 
-- Prototype an optional PR comment workflow that posts Markdown readiness reports.
+- Prototype the documented PR comment workflow that posts Markdown readiness reports.
 - Use API credits to summarize missing maintainer signals and draft release notes.
 - Add fixtures for Python, Node.js, Rust, and documentation-only repositories.
 - Improve scoring guidance for early projects with no external contributors yet.
 
 ## Completed
 
+- Document application evidence, GitHub Actions usage, and the PR comment workflow draft.
 - Add GitHub remote scan mode for public repositories with contextual metrics.
 - Add a Markdown output mode for issue comments and release notes.
 - Add release-readiness checks for changelogs, CI workflows, and release tags.

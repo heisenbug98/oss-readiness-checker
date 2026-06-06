@@ -6,6 +6,13 @@ It is built for new maintainers who want a quick, honest checklist before sharin
 
 The goal is not to fake activity. The goal is to make real maintenance easier to start.
 
+## Who this is for
+
+- New maintainers preparing a small repository for public feedback.
+- Project owners who want a quick checklist before inviting contributors.
+- Maintainers who want CI-friendly reminders for docs, security, templates, tests, and releases.
+- People evaluating their own repository before writing an honest support-program application.
+
 ## What it checks
 
 - README
@@ -86,7 +93,7 @@ Checks:
   OK Tests (package.json)
   OK CI workflows (.github/workflows)
   OK Changelog (CHANGELOG.md)
-  OK Release tags (v0.2.0)
+  OK Release tags (v0.3.0)
   -- Contributing guide
      Add CONTRIBUTING.md with setup steps, contribution scope, and PR expectations.
 ```
@@ -101,6 +108,9 @@ It does not try to predict eligibility for any specific grant or support program
 
 - [Maintainer checklist](docs/maintainer-checklist.md)
 - [Roadmap](docs/roadmap.md)
+- [Application evidence](docs/application-evidence.md)
+- [PR comment workflow draft](docs/pr-comment-workflow.md)
+- [GitHub Actions example](examples/github-action.md)
 - [Sample report](examples/sample-report.txt)
 - [Sample Markdown report](examples/sample-report.md)
 - [Sample GitHub report](examples/github-report.md)
