@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.0
+
+- Add GitHub remote scan mode for public repositories by `owner/repo` or GitHub URL.
+- Include remote repository metadata in text, JSON, and Markdown reports.
+- Add tests for GitHub URL parsing, mocked API checks, API errors, and network failures.
+- Update documentation with remote scan examples and a sample GitHub report.
+
 ## 0.2.0
 
 - Add release-readiness checks for changelogs, CI workflows, and release tags.
