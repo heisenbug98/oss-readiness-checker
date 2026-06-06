@@ -14,6 +14,7 @@ Use this checklist before sharing a new open source repository or asking others 
 
 - The project has at least one useful commit after the initial scaffold.
 - There is a small test or CI workflow.
+- Releases have tags and a changelog entry.
 - Security reporting expectations are documented.
 - The roadmap says what the project will and will not try to do.
 

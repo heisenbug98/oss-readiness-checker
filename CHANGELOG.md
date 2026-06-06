@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.0
+
+- Add release-readiness checks for changelogs, CI workflows, and release tags.
+- Rebalance readiness scoring to keep the total score at 100.
+- Update sample reports and documentation for release management signals.
+
 ## 0.1.1
 
 - Validate `--fail-under` values strictly so partial numbers such as `80abc` are rejected.

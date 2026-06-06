@@ -1,5 +1,6 @@
-OSS readiness score: 89/100 (ready)
+OSS readiness score: 100/100 (ready)
 Repository: /path/to/oss-readiness-checker
+GitHub remote: git@github.com:heisenbug98/oss-readiness-checker.git
 
 Checks:
   OK README (README.md)
@@ -9,8 +10,10 @@ Checks:
   OK Security policy (SECURITY.md)
   OK Issue templates (.github/ISSUE_TEMPLATE)
   OK Pull request template (.github/PULL_REQUEST_TEMPLATE.md)
-  OK Tests or CI (package.json)
-  -- Commit activity
-     Make at least one real commit after the initial scaffold.
+  OK Tests (package.json)
+  OK CI workflows (.github/workflows)
+  OK Commit activity
+  OK Changelog (CHANGELOG.md)
+  OK Release tags (v0.2.0)
 
 Next step: publish the repository, make one useful release, and invite real feedback.

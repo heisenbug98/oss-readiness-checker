@@ -6,28 +6,28 @@ const CHECKS = [
   {
     id: "readme",
     title: "README",
-    weight: 20,
+    weight: 16,
     pass: (repoPath) => findFirst(repoPath, ["README.md", "README.rst", "README.txt"]),
     advice: "Add a README with what the project does, how to install it, and one runnable example.",
   },
   {
     id: "license",
     title: "License",
-    weight: 15,
+    weight: 12,
     pass: (repoPath) => findFirst(repoPath, ["LICENSE", "LICENSE.md", "COPYING"]),
     advice: "Add a clear open source license such as MIT, Apache-2.0, or BSD-3-Clause.",
   },
   {
     id: "contributing",
     title: "Contributing guide",
-    weight: 12,
+    weight: 10,
     pass: (repoPath) => findFirst(repoPath, ["CONTRIBUTING.md", ".github/CONTRIBUTING.md"]),
     advice: "Add CONTRIBUTING.md with setup steps, contribution scope, and PR expectations.",
   },
   {
     id: "code_of_conduct",
     title: "Code of conduct",
-    weight: 8,
+    weight: 7,
     pass: (repoPath) => findFirst(repoPath, ["CODE_OF_CONDUCT.md", ".github/CODE_OF_CONDUCT.md"]),
     advice: "Add a code of conduct so new contributors know the community norms.",
   },
@@ -59,17 +59,38 @@ const CHECKS = [
   },
   {
     id: "tests_or_ci",
-    title: "Tests or CI",
-    weight: 10,
-    pass: (repoPath) => hasTestSignal(repoPath) || findDirectoryWithFiles(path.join(repoPath, ".github", "workflows")),
+    title: "Tests",
+    weight: 8,
+    pass: (repoPath) => hasTestSignal(repoPath),
     advice: "Add a small test script or GitHub Actions workflow.",
+  },
+  {
+    id: "ci_workflows",
+    title: "CI workflows",
+    weight: 8,
+    pass: (repoPath) => findDirectoryWithFiles(path.join(repoPath, ".github", "workflows")),
+    advice: "Add a GitHub Actions workflow or another visible CI configuration.",
   },
   {
     id: "recent_commits",
     title: "Commit activity",
-    weight: 11,
+    weight: 7,
     pass: (repoPath) => getCommitCount(repoPath) > 0,
     advice: "Make at least one real commit after the initial scaffold.",
+  },
+  {
+    id: "changelog",
+    title: "Changelog",
+    weight: 6,
+    pass: (repoPath) => findFirst(repoPath, ["CHANGELOG.md", "HISTORY.md", "RELEASES.md"]),
+    advice: "Add a changelog so users can understand what changed between releases.",
+  },
+  {
+    id: "release_tags",
+    title: "Release tags",
+    weight: 8,
+    pass: (repoPath) => getLatestReleaseTag(repoPath),
+    advice: "Create a release tag such as v0.1.0 after a tested release.",
   },
 ];
 
@@ -89,7 +110,7 @@ export function analyzeRepository(repoPath) {
       title: check.title,
       passed,
       weight: check.weight,
-      found: typeof value === "string" ? path.relative(absolutePath, value) : null,
+      found: getFoundValue(absolutePath, value),
       advice: passed ? null : check.advice,
     };
   });
@@ -105,6 +126,18 @@ export function analyzeRepository(repoPath) {
     githubRemote: getGithubRemote(absolutePath),
     results,
   };
+}
+
+function getFoundValue(repoPath, value) {
+  if (typeof value === "string") {
+    return path.relative(repoPath, value);
+  }
+
+  if (typeof value?.found === "string") {
+    return value.found;
+  }
+
+  return null;
 }
 
 function findFirst(repoPath, candidates) {
@@ -153,6 +186,29 @@ function getCommitCount(repoPath) {
   } catch {
     return 0;
   }
+}
+
+function getLatestReleaseTag(repoPath) {
+  try {
+    const output = execFileSync("git", ["tag", "--list", "v*"], {
+      cwd: repoPath,
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "ignore"],
+    })
+      .split("\n")
+      .map((tag) => tag.trim())
+      .filter(Boolean)
+      .sort(compareTags)
+      .at(-1);
+
+    return output ? { found: output } : null;
+  } catch {
+    return null;
+  }
+}
+
+function compareTags(left, right) {
+  return left.localeCompare(right, undefined, { numeric: true, sensitivity: "base" });
 }
 
 function getGithubRemote(repoPath) {

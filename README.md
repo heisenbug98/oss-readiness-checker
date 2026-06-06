@@ -15,8 +15,11 @@ The goal is not to fake activity. The goal is to make real maintenance easier to
 - Security policy
 - Issue templates
 - Pull request template
-- Tests or CI
+- Tests
+- CI workflows
 - Commit activity
+- Changelog
+- Release tags
 
 When a GitHub origin remote exists, the report also prints it.
 
@@ -71,6 +74,10 @@ Repository: /path/to/repo
 Checks:
   OK README (README.md)
   OK License (LICENSE)
+  OK Tests (package.json)
+  OK CI workflows (.github/workflows)
+  OK Changelog (CHANGELOG.md)
+  OK Release tags (v0.2.0)
   -- Contributing guide
      Add CONTRIBUTING.md with setup steps, contribution scope, and PR expectations.
 ```
