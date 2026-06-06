@@ -17,6 +17,8 @@ It is not a guarantee of eligibility for any support program. It is a concise re
 - PR #8: https://github.com/heisenbug98/oss-readiness-checker/pull/8
 - Issue #9: https://github.com/heisenbug98/oss-readiness-checker/issues/9
 - PR #10: https://github.com/heisenbug98/oss-readiness-checker/pull/10
+- Issue #11: https://github.com/heisenbug98/oss-readiness-checker/issues/11
+- PR #12: https://github.com/heisenbug98/oss-readiness-checker/pull/12
 - Release v0.3.0: https://github.com/heisenbug98/oss-readiness-checker/releases/tag/v0.3.0
 - Local readiness score: 100/100 with `node ./bin/oss-ready.js . --fail-under 90`
 - Remote readiness score: 100/100 with `node ./bin/oss-ready.js heisenbug98/oss-readiness-checker --markdown`
