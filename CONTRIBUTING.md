@@ -5,7 +5,7 @@ Thanks for taking a look at OSS Readiness Checker.
 ## Local setup
 
 ```bash
-git clone https://github.com/your-name/oss-readiness-checker.git
+git clone https://github.com/heisenbug98/oss-readiness-checker.git
 cd oss-readiness-checker
 npm test
 ```

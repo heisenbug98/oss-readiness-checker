@@ -25,7 +25,7 @@ When a GitHub origin remote exists, the report also prints it.
 Clone the repository and run the CLI locally:
 
 ```bash
-git clone https://github.com/your-name/oss-readiness-checker.git
+git clone https://github.com/heisenbug98/oss-readiness-checker.git
 cd oss-readiness-checker
 node ./bin/oss-ready.js .
 ```
