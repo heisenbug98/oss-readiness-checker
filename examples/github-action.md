@@ -2,7 +2,7 @@
 
 Use `oss-ready` in CI when you want a pull request or release branch to keep basic maintainer signals visible.
 
-This example installs dependencies, runs tests, and fails the workflow if the repository score drops below 80.
+This example runs tests and fails the workflow if the repository score drops below 80.
 
 ```yaml
 name: OSS readiness
@@ -27,9 +27,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-
-      - name: Install dependencies
-        run: npm ci
 
       - name: Run tests
         run: npm test

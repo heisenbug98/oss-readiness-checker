@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "node --test",
-    "check": "node ./bin/oss-ready.js ."
+    "check": "node ./bin/oss-ready.js .",
+    "pack:dry-run": "npm pack --dry-run"
   },
   "keywords": [
     "open-source",
@@ -17,6 +18,28 @@
     "github",
     "readiness"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heisenbug98/oss-readiness-checker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/heisenbug98/oss-readiness-checker/issues"
+  },
+  "homepage": "https://github.com/heisenbug98/oss-readiness-checker#readme",
+  "files": [
+    "bin",
+    "src",
+    "docs",
+    "examples",
+    "CHANGELOG.md",
+    "CODE_OF_CONDUCT.md",
+    "CONTRIBUTING.md",
+    "MAINTAINERS.md",
+    "SECURITY.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "license": "MIT",
   "engines": {
     "node": ">=18"

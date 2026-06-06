@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- Add a PR comment workflow MVP for Markdown readiness reports.
+- Document scoring rationale, maintainer responsibilities, and npm publishing preparation.
+- Add package metadata and a packaging dry-run script for npm readiness.
+- Add fixture tests for documentation-only repositories, missing release tags, rate limits, and tag fallback behavior.
+
 ## 0.3.0
 
 - Add GitHub remote scan mode for public repositories by `owner/repo` or GitHub URL.

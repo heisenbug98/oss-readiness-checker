@@ -1,8 +1,8 @@
-# PR Comment Workflow Draft
+# PR Comment Workflow
 
-This draft describes a practical maintainer workflow for posting `oss-ready` Markdown reports to pull requests.
+This document describes the maintainer workflow for posting `oss-ready` Markdown reports to pull requests.
 
-It is intentionally a draft. The project should keep the first implementation small and reviewable before adding a hosted service or bot.
+The first implementation lives in `.github/workflows/oss-readiness-comment.yml`. It is intentionally small and reviewable before adding API-assisted summaries or a hosted bot.
 
 ## Goal
 
@@ -22,8 +22,8 @@ The workflow should make missing basics easy to notice without blocking every co
 
 - Keep the CLI as the source of truth for scoring.
 - Use Markdown output directly for the PR comment body.
-- Add an optional `--fail-under` gate only when a project wants a hard threshold.
-- Prefer updating a single existing bot comment instead of posting a new comment on every push.
+- Use a hidden marker comment so pushes update one existing bot comment.
+- Keep hard score gates separate from the comment workflow.
 
 ## API Credits Use Case
 
