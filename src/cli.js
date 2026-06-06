@@ -67,7 +67,11 @@ function setFormat(parsed, format) {
 }
 
 function parseScore(value) {
-  const score = Number.parseInt(value, 10);
+  if (!/^\d+$/.test(value ?? "")) {
+    throw new Error("--fail-under must be an integer from 0 to 100.");
+  }
+
+  const score = Number(value);
 
   if (!Number.isInteger(score) || score < 0 || score > 100) {
     throw new Error("--fail-under must be an integer from 0 to 100.");
