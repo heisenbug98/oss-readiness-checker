@@ -14,6 +14,6 @@ Checks:
   OK CI workflows (.github/workflows)
   OK Commit activity
   OK Changelog (CHANGELOG.md)
-  OK Release tags (v0.2.0)
+  OK Release tags (v0.3.0)
 
 Next step: publish the repository, make one useful release, and invite real feedback.

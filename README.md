@@ -1,6 +1,6 @@
 # OSS Readiness Checker
 
-`oss-ready` is a small CLI that checks whether a repository has the basic public signals expected from a maintained open source project.
+`oss-ready` is a small CLI that checks whether a local repository or public GitHub repository has the basic public signals expected from a maintained open source project.
 
 It is built for new maintainers who want a quick, honest checklist before sharing a project, applying to open source support programs, or inviting contributors.
 
@@ -21,7 +21,7 @@ The goal is not to fake activity. The goal is to make real maintenance easier to
 - Changelog
 - Release tags
 
-When a GitHub origin remote exists, the report also prints it.
+When a GitHub origin remote exists, the report also prints it. When you scan a public GitHub repository, the report includes lightweight metadata such as stars, forks, open issues, default branch, latest release, and last pushed date. These metrics are shown as context, not as score multipliers.
 
 ## Install
 
@@ -46,6 +46,15 @@ Or run it against another path:
 ```bash
 node ./bin/oss-ready.js ../some-repo
 ```
+
+Analyze a public GitHub repository:
+
+```bash
+node ./bin/oss-ready.js heisenbug98/oss-readiness-checker
+node ./bin/oss-ready.js https://github.com/heisenbug98/oss-readiness-checker
+```
+
+Remote scans use the public GitHub API. Set `GITHUB_TOKEN` if you want higher API rate limits, but it is not required for public repositories.
 
 Print JSON:
 
@@ -94,6 +103,7 @@ It does not try to predict eligibility for any specific grant or support program
 - [Roadmap](docs/roadmap.md)
 - [Sample report](examples/sample-report.txt)
 - [Sample Markdown report](examples/sample-report.md)
+- [Sample GitHub report](examples/github-report.md)
 
 ## Development
 

@@ -2,7 +2,7 @@ import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 
-const CHECKS = [
+export const CHECKS = [
   {
     id: "readme",
     title: "README",
@@ -115,16 +115,27 @@ export function analyzeRepository(repoPath) {
     };
   });
 
+  const githubRemote = getGithubRemote(absolutePath);
+
+  return buildReport({
+    mode: "local",
+    path: absolutePath,
+    repositoryUrl: githubRemote,
+    githubRemote,
+    metrics: null,
+    results,
+  });
+}
+
+export function buildReport(report) {
   const totalWeight = CHECKS.reduce((sum, check) => sum + check.weight, 0);
-  const earnedWeight = results.reduce((sum, result) => sum + (result.passed ? result.weight : 0), 0);
+  const earnedWeight = report.results.reduce((sum, result) => sum + (result.passed ? result.weight : 0), 0);
   const score = Math.round((earnedWeight / totalWeight) * 100);
 
   return {
-    path: absolutePath,
+    ...report,
     score,
     rating: getRating(score),
-    githubRemote: getGithubRemote(absolutePath),
-    results,
   };
 }
 
@@ -229,7 +240,7 @@ function getGithubRemote(repoPath) {
   return null;
 }
 
-function getRating(score) {
+export function getRating(score) {
   if (score >= 85) {
     return "ready";
   }

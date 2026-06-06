@@ -1,4 +1,8 @@
+import { existsSync } from "node:fs";
+import path from "node:path";
+
 import { analyzeRepository } from "./checks.js";
+import { analyzeGitHubRepository, parseGitHubRepository } from "./github.js";
 
 export async function runCli(args, io) {
   const parsed = parseArgs(args);
@@ -8,7 +12,7 @@ export async function runCli(args, io) {
     return 0;
   }
 
-  const report = analyzeRepository(parsed.repoPath ?? io.cwd);
+  const report = await analyzeTarget(parsed.repoPath ?? io.cwd, io);
 
   if (parsed.format === "json") {
     io.stdout.write(`${JSON.stringify(report, null, 2)}\n`);
@@ -24,6 +28,20 @@ export async function runCli(args, io) {
   }
 
   return 0;
+}
+
+async function analyzeTarget(target, io) {
+  const githubRepository = parseGitHubRepository(target);
+  const localPath = path.resolve(io.cwd, target);
+
+  if (githubRepository && !existsSync(localPath)) {
+    return analyzeGitHubRepository(githubRepository, {
+      fetch: io.fetch,
+      env: io.env,
+    });
+  }
+
+  return analyzeRepository(localPath);
 }
 
 function parseArgs(args) {
@@ -83,11 +101,18 @@ function parseScore(value) {
 function formatReport(report) {
   const lines = [
     `OSS readiness score: ${report.score}/100 (${report.rating})`,
-    `Repository: ${report.path}`,
+    `Repository: ${getRepositoryLabel(report)}`,
   ];
 
   if (report.githubRemote) {
     lines.push(`GitHub remote: ${report.githubRemote}`);
+  }
+
+  if (report.metrics) {
+    lines.push(
+      `GitHub metrics: ${formatMetrics(report.metrics)}`,
+      `Last pushed: ${report.metrics.lastPushedAt ?? "unknown"}`,
+    );
   }
 
   lines.push("", "Checks:");
@@ -111,11 +136,18 @@ function formatMarkdownReport(report) {
     "# OSS readiness report",
     "",
     `**Score:** ${report.score}/100 (${report.rating})`,
-    `**Repository:** \`${report.path}\``,
+    `**Repository:** \`${getRepositoryLabel(report)}\``,
   ];
 
   if (report.githubRemote) {
     lines.push(`**GitHub remote:** \`${report.githubRemote}\``);
+  }
+
+  if (report.metrics) {
+    lines.push(
+      `**GitHub metrics:** ${escapeMarkdownTableCell(formatMetrics(report.metrics))}`,
+      `**Last pushed:** \`${report.metrics.lastPushedAt ?? "unknown"}\``,
+    );
   }
 
   lines.push("", "| Status | Check | Evidence | Advice |", "| --- | --- | --- | --- |");
@@ -133,6 +165,28 @@ function formatMarkdownReport(report) {
 
 function escapeMarkdownTableCell(value) {
   return value.replaceAll("|", "\\|").replaceAll("\n", " ");
+}
+
+function getRepositoryLabel(report) {
+  return report.path ?? report.repositoryUrl;
+}
+
+function formatMetrics(metrics) {
+  const parts = [
+    `${metrics.stars ?? 0} stars`,
+    `${metrics.forks ?? 0} forks`,
+    `${metrics.openIssues ?? 0} open issues`,
+  ];
+
+  if (metrics.defaultBranch) {
+    parts.push(`default branch ${metrics.defaultBranch}`);
+  }
+
+  if (metrics.latestRelease) {
+    parts.push(`latest release ${metrics.latestRelease}`);
+  }
+
+  return parts.join(", ");
 }
 
 function getNextStep(score) {
@@ -154,6 +208,8 @@ Check whether a repository has basic open source maintenance signals.
 
 Usage:
   oss-ready [path]
+  oss-ready owner/repo
+  oss-ready https://github.com/owner/repo
   oss-ready [path] --json
   oss-ready [path] --markdown
   oss-ready [path] --fail-under 80
