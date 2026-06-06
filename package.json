@@ -1,6 +1,6 @@
 {
   "name": "oss-readiness-checker",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A tiny CLI that checks whether a repository has the basic signals expected from a maintained open source project.",
   "type": "module",
   "bin": {

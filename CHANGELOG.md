@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1
+
+- Validate `--fail-under` values strictly so partial numbers such as `80abc` are rejected.
+
 ## 0.1.0
 
 - Add the first `oss-ready` CLI.

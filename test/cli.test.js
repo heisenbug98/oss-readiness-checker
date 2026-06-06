@@ -68,6 +68,22 @@ test("rejects multiple output formats", async () => {
   );
 });
 
+test("rejects invalid fail-under scores", async () => {
+  const output = captureOutput();
+
+  for (const value of ["80abc", "80.5", "-1", "101", ""]) {
+    await assert.rejects(
+      () =>
+        runCli(["--fail-under", value], {
+          cwd: process.cwd(),
+          stdout: output.stdout,
+          stderr: output.stderr,
+        }),
+      /--fail-under must be an integer from 0 to 100/,
+    );
+  }
+});
+
 function captureOutput() {
   return {
     stdout: {
