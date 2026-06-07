@@ -2,6 +2,8 @@
 
 OSS Readiness Checker is prepared for npm-style packaging, but publishing should happen only when the maintainer is ready to support public installation.
 
+The npm package name is `oss-ready`, matching the CLI command.
+
 ## Package Metadata
 
 The package exposes one CLI binary:
@@ -38,7 +40,7 @@ npm run pack:dry-run
 After the package is published, users should be able to run:
 
 ```bash
-npm install -g oss-readiness-checker
+npm install -g oss-ready
 oss-ready .
 ```
 

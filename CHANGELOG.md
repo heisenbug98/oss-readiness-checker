@@ -1,11 +1,12 @@
 # Changelog
 
-## Unreleased
+## 0.3.1
 
 - Add a PR comment workflow MVP for Markdown readiness reports.
 - Document scoring rationale, maintainer responsibilities, and npm publishing preparation.
 - Add package metadata and a packaging dry-run script for npm readiness.
 - Add fixture tests for documentation-only repositories, missing release tags, rate limits, and tag fallback behavior.
+- Prepare the npm package as `oss-ready`.
 
 ## 0.3.0
 

@@ -32,7 +32,20 @@ When a GitHub origin remote exists, the report also prints it. When you scan a p
 
 ## Install
 
-Clone the repository and run the CLI locally:
+Install the CLI from npm:
+
+```bash
+npm install -g oss-ready
+oss-ready .
+```
+
+Or run it without a global install:
+
+```bash
+npx oss-ready .
+```
+
+You can also clone the repository and run the CLI locally:
 
 ```bash
 git clone https://github.com/heisenbug98/oss-readiness-checker.git
@@ -45,20 +58,20 @@ node ./bin/oss-ready.js .
 Run it against the current repository:
 
 ```bash
-npm run check
+oss-ready .
 ```
 
 Or run it against another path:
 
 ```bash
-node ./bin/oss-ready.js ../some-repo
+oss-ready ../some-repo
 ```
 
 Analyze a public GitHub repository:
 
 ```bash
-node ./bin/oss-ready.js heisenbug98/oss-readiness-checker
-node ./bin/oss-ready.js https://github.com/heisenbug98/oss-readiness-checker
+oss-ready heisenbug98/oss-readiness-checker
+oss-ready https://github.com/heisenbug98/oss-readiness-checker
 ```
 
 Remote scans use the public GitHub API. Set `GITHUB_TOKEN` if you want higher API rate limits, but it is not required for public repositories.
@@ -66,19 +79,19 @@ Remote scans use the public GitHub API. Set `GITHUB_TOKEN` if you want higher AP
 Print JSON:
 
 ```bash
-node ./bin/oss-ready.js . --json
+oss-ready . --json
 ```
 
 Print Markdown for a GitHub issue, pull request comment, or release note:
 
 ```bash
-node ./bin/oss-ready.js . --markdown
+oss-ready . --markdown
 ```
 
 Use it in CI with a minimum score:
 
 ```bash
-node ./bin/oss-ready.js . --fail-under 80
+oss-ready . --fail-under 80
 ```
 
 ## Example output

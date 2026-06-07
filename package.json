@@ -1,10 +1,10 @@
 {
-  "name": "oss-readiness-checker",
-  "version": "0.3.0",
+  "name": "oss-ready",
+  "version": "0.3.1",
   "description": "A tiny CLI that checks whether a repository has the basic signals expected from a maintained open source project.",
   "type": "module",
   "bin": {
-    "oss-ready": "./bin/oss-ready.js"
+    "oss-ready": "bin/oss-ready.js"
   },
   "scripts": {
     "test": "node --test",
