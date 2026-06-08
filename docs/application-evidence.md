@@ -34,7 +34,7 @@ It is not a guarantee of eligibility for any support program. It is a concise re
 ## External Open Source Evidence
 
 - External PR: https://github.com/EbookFoundation/free-programming-books/pull/13298
-- Status checked on 2026-06-07 KST: open, mergeable, and all visible checks passing.
+- Status checked on 2026-06-08 KST: merged, with all visible checks passing before merge.
 - Contribution: add a free Korean Linux command line book entry with author, translator, format, and license metadata.
 
 ## What The Project Does
@@ -50,7 +50,7 @@ The v0.3.0 release added public GitHub repository scanning so a maintainer can i
 Why this repository qualifies:
 
 ```text
-OSS Readiness Checker is a maintained CLI I built to help public repos surface maintainer readiness signals: docs, license, security policy, templates, tests, CI, changelog, releases, and public GitHub scans. It has issue->PR->CI->merge workflows, v0.3.0 release, 100/100 self-checks, PR comment automation docs, maintainer docs, tests for API failures, and an external OSS PR with all checks passing.
+OSS Readiness Checker is a maintained CLI I built to help public repos surface maintainer readiness signals: docs, license, security policy, templates, tests, CI, changelog, releases, and public GitHub scans. It has issue->PR->CI->merge workflows, a published npm package, v0.3.1 release, 100/100 local and remote self-checks, maintainer docs, API failure tests, and a merged external OSS PR.
 ```
 
 How API credits would be used:
