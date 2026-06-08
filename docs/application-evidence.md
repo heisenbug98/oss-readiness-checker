@@ -8,7 +8,7 @@ It is not a guarantee of eligibility for any support program. It is a concise re
 
 - Repository: https://github.com/heisenbug98/oss-readiness-checker
 - npm package: https://www.npmjs.com/package/oss-ready
-- Latest release: https://github.com/heisenbug98/oss-readiness-checker/releases/tag/v0.3.0
+- Latest release: https://github.com/heisenbug98/oss-readiness-checker/releases/tag/v0.3.1
 - Public launch note: https://gist.github.com/heisenbug98/0e2b0626489092f84cfea2bec95abed3
 - Role: primary maintainer
 
@@ -20,10 +20,14 @@ It is not a guarantee of eligibility for any support program. It is a concise re
 - PR #10: https://github.com/heisenbug98/oss-readiness-checker/pull/10
 - Issue #11: https://github.com/heisenbug98/oss-readiness-checker/issues/11
 - PR #12: https://github.com/heisenbug98/oss-readiness-checker/pull/12
-- Release v0.3.0: https://github.com/heisenbug98/oss-readiness-checker/releases/tag/v0.3.0
+- Issue #13: https://github.com/heisenbug98/oss-readiness-checker/issues/13
+- PR #14: https://github.com/heisenbug98/oss-readiness-checker/pull/14
+- Self-dogfooding issue #15: https://github.com/heisenbug98/oss-readiness-checker/issues/15
+- Release v0.3.1: https://github.com/heisenbug98/oss-readiness-checker/releases/tag/v0.3.1
 - Local readiness score: 100/100 with `node ./bin/oss-ready.js . --fail-under 90`
 - Remote readiness score: 100/100 with `node ./bin/oss-ready.js heisenbug98/oss-readiness-checker --markdown`
-- npm install flow: `npm install -g oss-ready` then `oss-ready .`
+- npm install flow: `npm install -g oss-ready` then `oss-ready .`, verified in issue #15.
+- npx flow: `npx oss-ready .`, verified from a clean directory in issue #15.
 - CI: GitHub Actions test workflow passed on the merged PR.
 - Maintainer docs: scoring rationale, PR comment workflow, GitHub Actions usage, and publishing preparation.
 
@@ -39,7 +43,7 @@ OSS Readiness Checker helps maintainers inspect visible repository trust signals
 
 It checks for maintainer basics such as README, license, contribution guide, security policy, issue templates, PR template, tests, CI workflows, changelog, release tags, and recent activity.
 
-The v0.3.0 release added public GitHub repository scanning so a maintainer can inspect a repo by `owner/repo` or GitHub URL, not only from a local checkout. Later documentation work added application evidence, scoring rationale, a PR comment workflow, maintainer responsibilities, npm publishing preparation, and the `oss-ready` npm package.
+The v0.3.0 release added public GitHub repository scanning so a maintainer can inspect a repo by `owner/repo` or GitHub URL, not only from a local checkout. Later documentation work added application evidence, scoring rationale, a PR comment workflow, maintainer responsibilities, npm publishing preparation, and the published `oss-ready` npm package.
 
 ## Short Application Drafts
 
